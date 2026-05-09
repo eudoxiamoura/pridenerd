@@ -115,6 +115,11 @@
             background-attachment: fixed;
         }
 
+        /* Fallback color if image is not found */
+        .hero-bg {
+            background-color: #006b24; 
+        }
+
         .hero-grid {
             background-image:
                 linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
@@ -143,11 +148,6 @@
                 );
         }
 
-        .glass {
-            backdrop-filter: blur(10px);
-            background: rgba(255,255,255,.85);
-        }
-
         .noise::before {
             content: '';
             position: absolute;
@@ -169,21 +169,35 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Adjustments for image placeholders */
+        .game-img-placeholder {
+            background-image: repeating-linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc), repeating-linear-gradient(45deg, #ccc 25%, #f4f4f0 25%, #f4f4f0 75%, #ccc 75%, #ccc);
+            background-position: 0 0, 10px 10px;
+            background-size: 20px 20px;
+        }
     </style>
 </head>
 <body class="text-gray-900 antialiased">
-    <br>
 
-    <nav class="fixed w-full top-0 z-50 bg-ifro-green/90 backdrop-blur-md border-b-4 border-black shadow-comic">
+    <!-- Navegação -->
+    <nav class="fixed w-full top-0 z-50 bg-ifro-green/95 backdrop-blur-md border-b-4 border-black shadow-comic">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-between items-center h-16">
+            <div class="flex justify-between items-center h-16 md:h-20"> <!-- Altura maior no desktop -->
 
-                <div>
-                    <span class="font-bangers text-4xl text-zap-yellow tracking-widest" style="-webkit-text-stroke:1px black;">
+                <!-- Logo -->
+                <div class="z-50">
+                    <span class="font-bangers text-3xl md:text-4xl text-zap-yellow tracking-widest" style="-webkit-text-stroke:1px black;">
                         IFRO NERD
                     </span>
                 </div>
 
+                <!-- Botão Menu Mobile -->
+                <button id="mobile-menu-btn" class="md:hidden font-bangers text-2xl text-white bg-hero-red comic-border px-3 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] z-50">
+                    MENU
+                </button>
+
+                <!-- Links Desktop -->
                 <div class="hidden md:flex items-center gap-8 text-white font-bold uppercase text-sm">
                     <a href="#missao" class="hover:text-zap-yellow transition">Missão</a>
                     <a href="#cronograma" class="hover:text-zap-yellow transition">Cronograma</a>
@@ -191,379 +205,328 @@
                     <a href="#regulamentos" class="hover:text-zap-yellow transition">Regulamentos</a>
                 </div>
 
+                <!-- Botão Aliste-se Desktop -->
                 <a href="#alistamento"
-                   class="font-bangers text-xl bg-hero-red text-white px-6 py-2 comic-border shadow-comic hover:-translate-y-1 hover:scale-105 transition-all duration-300">
+                   class="hidden md:block font-bangers text-xl bg-hero-red text-white px-6 py-2 comic-border shadow-comic hover:-translate-y-1 hover:scale-105 transition-all duration-300">
                     ALISTE-SE
                 </a>
 
             </div>
         </div>
+
+        <!-- Menu Dropdown Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-ifro-green border-b-4 border-black shadow-comic flex flex-col font-bold uppercase text-center">
+            <a href="#missao" class="mobile-link text-white py-4 border-b border-black/20 hover:bg-black/10">Missão</a>
+            <a href="#cronograma" class="mobile-link text-white py-4 border-b border-black/20 hover:bg-black/10">Cronograma</a>
+            <a href="#games" class="mobile-link text-white py-4 border-b border-black/20 hover:bg-black/10">Torneios</a>
+            <a href="#regulamentos" class="mobile-link text-white py-4 border-b border-black/20 hover:bg-black/10">Regulamentos</a>
+            <a href="#alistamento" class="mobile-link font-bangers text-2xl text-zap-yellow py-5 bg-hero-red" style="-webkit-text-stroke: 1px black;">ALISTE-SE AGORA!</a>
+        </div>
     </nav>
 
-    <header id="missao" class="hero-bg hero-grid relative min-h-screen flex items-center justify-center overflow-hidden">
-
+    <!-- Header / Missão -->
+    <header id="missao" class="hero-bg hero-grid relative min-h-[100svh] flex items-center justify-center overflow-hidden pt-16">
         <div class="hero-glow"></div>
-
         <div class="absolute inset-0 noise"></div>
 
-        <div class="relative z-10 text-center px-6 max-w-6xl">
+        <div class="relative z-10 text-center px-4 md:px-6 max-w-6xl w-full">
 
-            <p class="text-white font-black tracking-[0.3em] uppercase mb-4">
+            <p class="text-white font-black tracking-[0.2em] md:tracking-[0.3em] uppercase mb-4 text-xs md:text-base">
                 25 de Maio • IFRO Campus Ariquemes
             </p>
 
-            <h1 class="font-bangers text-zap-yellow leading-none text-6xl md:text-8xl lg:text-[11rem] animate-glitch"
+            <!-- Tipografia ajustada para mobile -->
+            <h1 class="font-bangers text-zap-yellow leading-none text-6xl sm:text-7xl md:text-8xl lg:text-[11rem] animate-glitch"
                 style="
-                    -webkit-text-stroke: 3px black;
+                    -webkit-text-stroke: 2px black;
                     text-shadow:
                         3px 3px 0 #ED1C24,
-                        6px 6px 0 #0984E3,
-                        0 0 25px rgba(255,215,0,.5);
+                        5px 5px 0 #0984E3,
+                        0 0 15px rgba(255,215,0,.5);
                 ">
                 POW!<br>
                 ZAP!<br>
                 IFRO
             </h1>
 
-            <div style="margin-bottom: 20px;" class="bg-white comic-border p-6 md:p-8 inline-block shadow-comic mt-8 max-w-3xl transform -rotate-1 hover:rotate-0 transition-transform duration-300">
-
-                <p class="font-black text-xl md:text-2xl uppercase text-hero-red mb-4">
+            <div class="bg-white comic-border p-5 md:p-8 inline-block shadow-comic mt-8 max-w-3xl transform -rotate-2 hover:rotate-0 transition-transform duration-300 w-full">
+                <p class="font-black text-lg sm:text-xl md:text-2xl uppercase text-hero-red mb-3 md:mb-4">
                     Unindo o Multiverso Acadêmico!
                 </p>
-
-                <p class="text-lg font-medium leading-relaxed mb-4">
+                <p class="text-sm sm:text-base md:text-lg font-medium leading-relaxed mb-3">
                     Prepare-se para a maior convergência geek da história do campus!
                 </p>
-
-                <p class="text-lg font-medium leading-relaxed mb-4">
+                <p class="text-sm sm:text-base md:text-lg font-medium leading-relaxed mb-3">
                     Do campo aos códigos, das receitas às artes.
                 </p>
-
-                <p class="text-lg font-medium leading-relaxed">
+                <p class="text-sm sm:text-base md:text-lg font-medium leading-relaxed">
                     A missão do Dia do Orgulho Nerd é clara: celebrar o conhecimento e a cultura pop com a força máxima do IFRO Ariquemes.
                 </p>
-
             </div>
-
         </div>
-
     </header>
 
-    <section id="games" class="py-24 relative overflow-hidden">
-
+    <!-- Torneios -->
+    <section id="games" class="py-16 md:py-24 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4">
-
-            <div class="text-center mb-14 scroll-reveal">
-
-                <h2 class="font-bangers text-6xl text-hero-red"
+            <div class="text-center mb-10 md:mb-14 scroll-reveal">
+                <h2 class="font-bangers text-5xl md:text-6xl text-hero-red"
                     style="-webkit-text-stroke:1px black;">
                     TORNEIOS
                 </h2>
-
-                <p class="font-bold uppercase tracking-wider mt-2">
+                <p class="font-bold uppercase tracking-wider mt-2 text-sm md:text-base">
                     Escolha seu campo de batalha.
                 </p>
-
             </div>
 
-            <div id="gamesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"></div>
-
+            <div id="gamesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                <!-- Preenchido via JS -->
+            </div>
         </div>
-
     </section>
 
-    <section id="regulamentos" class="py-24 bg-gray-100 relative overflow-hidden">
-
+    <!-- Regulamentos -->
+    <section id="regulamentos" class="py-16 md:py-24 bg-gray-100 relative overflow-hidden">
         <div class="max-w-5xl mx-auto px-4">
-
-            <div class="text-center mb-14 scroll-reveal">
-
-                <h2 class="font-bangers text-6xl text-hero-red" style="-webkit-text-stroke:1px black;">
+            <div class="text-center mb-10 md:mb-14 scroll-reveal">
+                <h2 class="font-bangers text-5xl md:text-6xl text-hero-red" style="-webkit-text-stroke:1px black;">
                     REGULAMENTOS
                 </h2>
-
-                <p class="font-bold uppercase tracking-wider mt-2">
+                <p class="font-bold uppercase tracking-wider mt-2 text-sm md:text-base">
                     Regras do evento.
                 </p>
-
             </div>
 
-            <details class="bg-white comic-border p-6 shadow-comic scroll-reveal">
-                <summary class="font-bangers text-2xl cursor-pointer">Clique para expandir os regulamentos</summary>
-                <div class="mt-4">
-                    <p>Em Breve!</p>
+            <details class="bg-white comic-border p-4 md:p-6 shadow-comic scroll-reveal w-full">
+                <summary class="font-bangers text-xl md:text-2xl cursor-pointer">Clique para expandir os regulamentos</summary>
+                <div class="mt-4 text-sm md:text-base">
+                    <p>Em Breve as regras completas serão postadas aqui!</p>
                 </div>
             </details>
-
         </div>
-
     </section>
 
-    <section id="cronograma" class="py-24 bg-white border-y-4 border-black relative overflow-hidden">
-
+    <!-- Cronograma -->
+    <section id="cronograma" class="py-16 md:py-24 bg-white border-y-4 border-black relative overflow-hidden">
         <div class="absolute inset-0 opacity-10 pointer-events-none">
             <div class="hero-grid w-full h-full"></div>
         </div>
 
         <div class="max-w-5xl mx-auto px-4 relative z-10">
-
-            <div class="text-center mb-16 scroll-reveal">
-
-                <div class="inline-block bg-tech-blue text-white comic-border px-8 py-6 shadow-comic rotate-1">
-                    <h2 class="font-bangers text-6xl text-zap-yellow"
+            <div class="text-center mb-12 md:mb-16 scroll-reveal">
+                <div class="inline-block bg-tech-blue text-white comic-border px-6 py-4 md:px-8 md:py-6 shadow-comic rotate-1">
+                    <h2 class="font-bangers text-4xl sm:text-5xl md:text-6xl text-zap-yellow"
                         style="-webkit-text-stroke:1px black;">
                         LINHA DO TEMPO
                     </h2>
-
-                    <p class="font-bold mt-2 uppercase text-sm tracking-wide">
+                    <p class="font-bold mt-2 uppercase text-xs md:text-sm tracking-wide">
                         Cada minuto conta.
                     </p>
                 </div>
-
             </div>
 
-            <div class="relative ml-6 md:ml-0">
+            <!-- Ajuste Mobile: Container com padding esquerdo -->
+            <div class="relative pl-8 md:pl-0">
+                <!-- Linha centralizada no desktop, fixada à esquerda no mobile -->
+                <div class="absolute left-2 md:left-1/2 top-0 md:-translate-x-1/2 w-2 md:w-3 h-full rounded-full timeline-line border-2 border-black"></div>
 
-                <div class="absolute left-0 md:left-1/2 top-0 -translate-x-1/2 w-3 h-full rounded-full timeline-line border-2 border-black"></div>
+                <div class="space-y-12 md:space-y-16">
 
-                <div class="space-y-16">
-
-                    <div class="relative md:flex md:justify-start scroll-reveal">
-
-                        <div class="md:w-1/2 md:pr-14">
-
-                            <div class="absolute left-[-14px] md:left-auto md:right-[-18px] top-5 w-8 h-8 rounded-full bg-hero-red border-4 border-black z-20"></div>
-
-                            <div class="bg-white comic-border p-6 shadow-comic hover:-translate-y-2 transition duration-300">
-
-                                <span class="font-bangers text-4xl text-hero-red">08:00 - 12:00</span>
-
-                                <h3 class="font-black uppercase text-2xl mt-2 mb-4">
+                    <!-- Item 1 -->
+                    <div class="relative md:flex md:justify-start scroll-reveal w-full px-2 md:px-0">
+                        <div class="md:w-1/2 md:pr-14 relative">
+                            <!-- Card com margem interna garantida -->
+                            <div class="bg-white comic-border p-5 md:p-6 shadow-comic hover:-translate-y-1 md:hover:-translate-y-2 transition duration-300 ml-4 md:ml-0">
+                                <span class="font-bangers text-3xl md:text-4xl text-hero-red">08:00 - 12:00</span>
+                                <h3 class="font-black uppercase text-xl md:text-2xl mt-1 md:mt-2 mb-2 md:mb-4">
                                     Abertura & Torneios
                                 </h3>
-
-                                <p class="font-medium leading-relaxed">
+                                <p class="font-medium text-sm md:text-base leading-relaxed">
                                     Início oficial do evento com partidas, disputas e desafios competitivos.
                                 </p>
-
                             </div>
-
                         </div>
-
                     </div>
 
-                    <div class="relative md:flex md:justify-end scroll-reveal">
-
-                        <div class="md:w-1/2 md:pl-14">
-
-                            <div class="absolute left-[-14px] md:left-[-18px] top-5 w-8 h-8 rounded-full bg-zap-yellow border-4 border-black z-20"></div>
-
-                            <div class="bg-zap-yellow comic-border p-6 shadow-comic hover:-translate-y-2 transition duration-300">
-
-                                <span class="font-bangers text-4xl">12:00 - 13:00</span>
-
-                                <h3 class="font-black uppercase text-2xl mt-2 mb-4">
+                    <!-- Item 2 -->
+                    <div class="relative md:flex md:justify-end scroll-reveal w-full px-2 md:px-0">
+                        <div class="md:w-1/2 md:pl-14 relative">
+                            <div class="bg-zap-yellow comic-border p-5 md:p-6 shadow-comic hover:-translate-y-1 md:hover:-translate-y-2 transition duration-300 ml-4 md:ml-0">
+                                <span class="font-bangers text-3xl md:text-4xl">12:00 - 13:00</span>
+                                <h3 class="font-black uppercase text-xl md:text-2xl mt-1 md:mt-2 mb-2 md:mb-4">
                                     Recarga Energética
                                 </h3>
-
-                                <p class="font-medium">
+                                <p class="font-medium text-sm md:text-base">
                                     Hora de restaurar HP antes da próxima fase.
                                 </p>
-
                             </div>
-
                         </div>
-
                     </div>
 
-                    <div class="relative md:flex md:justify-start scroll-reveal">
-
-                        <div class="md:w-1/2 md:pr-14">
-
-                            <div class="absolute left-[-14px] md:left-auto md:right-[-18px] top-5 w-8 h-8 rounded-full bg-tech-blue border-4 border-black z-20"></div>
-
-                            <div class="bg-white comic-border p-6 shadow-comic hover:-translate-y-2 transition duration-300">
-
-                                <span class="font-bangers text-4xl text-tech-blue">13:00 - 15:15</span>
-
-                                <h3 class="font-black uppercase text-2xl mt-2 mb-4">
+                    <!-- Item 3 -->
+                    <div class="relative md:flex md:justify-start scroll-reveal w-full px-2 md:px-0">
+                        <div class="md:w-1/2 md:pr-14 relative">
+                            <div class="bg-white comic-border p-5 md:p-6 shadow-comic hover:-translate-y-1 md:hover:-translate-y-2 transition duration-300 ml-4 md:ml-0">
+                                <span class="font-bangers text-3xl md:text-4xl text-tech-blue">13:00 - 15:15</span>
+                                <h3 class="font-black uppercase text-xl md:text-2xl mt-1 md:mt-2 mb-2 md:mb-4">
                                     Imersão & Cinema
                                 </h3>
-
-                                <p class="font-medium">
+                                <p class="font-medium text-sm md:text-base">
                                     Sessões temáticas, experiências geek e exibições especiais.
                                 </p>
-
                             </div>
-
                         </div>
-
                     </div>
 
-                    <div class="relative md:flex md:justify-end scroll-reveal">
-
-                        <div class="md:w-1/2 md:pl-14">
-
-                            <div class="absolute left-[-14px] md:left-[-18px] top-5 w-8 h-8 rounded-full bg-ifro-green border-4 border-black z-20"></div>
-
-                            <div class="bg-ifro-green text-white comic-border p-6 shadow-comic hover:-translate-y-2 transition duration-300">
-
-                                <span class="font-bangers text-4xl text-zap-yellow">15:30 - 16:15</span>
-
-                                <h3 class="font-black uppercase text-2xl mt-2 mb-4">
+                    <!-- Item 4 -->
+                    <div class="relative md:flex md:justify-end scroll-reveal w-full px-2 md:px-0">
+                        <div class="md:w-1/2 md:pl-14 relative">
+                            <div class="bg-ifro-green text-white comic-border p-5 md:p-6 shadow-comic hover:-translate-y-1 md:hover:-translate-y-2 transition duration-300 ml-4 md:ml-0">
+                                <span class="font-bangers text-3xl md:text-4xl text-zap-yellow">15:30 - 16:15</span>
+                                <h3 class="font-black uppercase text-xl md:text-2xl mt-1 md:mt-2 mb-2 md:mb-4">
                                     Show de Talentos
                                 </h3>
-
-                                <p class="font-medium">
+                                <p class="font-medium text-sm md:text-base">
                                     K-pop, aberturas de anime, dança e apresentações criativas.
                                 </p>
-
                             </div>
-
                         </div>
-
                     </div>
 
-                    <div class="relative md:flex md:justify-start scroll-reveal">
-
-                        <div class="md:w-1/2 md:pr-14">
-
-                            <div class="absolute left-[-14px] md:left-auto md:right-[-18px] top-5 w-8 h-8 rounded-full bg-black border-4 border-black z-20"></div>
-
-                            <div class="bg-black text-white comic-border p-6 shadow-comic hover:-translate-y-2 transition duration-300">
-
-                                <span class="font-bangers text-4xl text-zap-yellow">16:15 - 17:30</span>
-
-                                <h3 class="font-black uppercase text-2xl mt-2 mb-4">
+                    <!-- Item 5 -->
+                    <div class="relative md:flex md:justify-start scroll-reveal w-full px-2 md:px-0">
+                        <div class="md:w-1/2 md:pr-14 relative">
+                            <div class="bg-black text-white comic-border p-5 md:p-6 shadow-comic hover:-translate-y-1 md:hover:-translate-y-2 transition duration-300 ml-4 md:ml-0">
+                                <span class="font-bangers text-3xl md:text-4xl text-zap-yellow">16:15 - 17:30</span>
+                                <h3 class="font-black uppercase text-xl md:text-2xl mt-1 md:mt-2 mb-2 md:mb-4">
                                     Cosplay & Premiações
                                 </h3>
-
-                                <p class="font-medium">
+                                <p class="font-medium text-sm md:text-base">
                                     O grande final do multiverso nerd com brindes, medalhas e sorteios.
                                 </p>
-
                             </div>
-
                         </div>
-
                     </div>
 
                 </div>
-
             </div>
-
         </div>
-
     </section>
 
-    <section id="alistamento" class="py-28 bg-hero-red relative overflow-hidden">
-
+    <!-- Alistamento / Contagem -->
+    <section id="alistamento" class="py-20 md:py-28 bg-hero-red relative overflow-hidden">
         <div class="absolute inset-0 hero-grid opacity-20"></div>
-
         <div class="max-w-5xl mx-auto px-4 text-center relative z-10">
 
-            <h2 class="font-bangers text-zap-yellow text-7xl md:text-9xl leading-none mb-6"
+            <!-- Tipografia Responsiva -->
+            <h2 class="font-bangers text-zap-yellow text-5xl sm:text-6xl md:text-8xl lg:text-9xl leading-none mb-4 md:mb-6"
                 style="-webkit-text-stroke:2px black;">
                 INSCREVA-SE
             </h2>
 
-            <p class="text-white font-bold uppercase tracking-[0.2em] mb-10">
+            <p class="text-white font-bold uppercase tracking-[0.1em] md:tracking-[0.2em] mb-8 md:mb-10 text-xs md:text-base">
                 O evento começa em:
             </p>
 
-            <div id="countdown"
-                 class="max-w-3xl mx-auto bg-black/95 backdrop-blur-md text-white comic-border shadow-comicWhite p-8 grid grid-cols-2 md:grid-cols-4 gap-6 animate-pulseGlow">
-
-                <div>
-                    <span id="days" class="block font-bangers text-6xl text-hero-red">00</span>
-                    <p class="uppercase font-bold text-xs tracking-widest">Dias</p>
+            <div id="countdown-container" class="max-w-3xl mx-auto bg-black/95 backdrop-blur-md text-white comic-border shadow-comicWhite p-4 sm:p-6 md:p-8 grid grid-cols-4 gap-2 sm:gap-4 md:gap-6 animate-pulseGlow w-full">
+                <!-- Coluna: Dias -->
+                <div class="flex flex-col items-center justify-center">
+                    <span id="days" class="block font-bangers text-3xl sm:text-4xl md:text-6xl text-hero-red">00</span>
+                    <p class="uppercase font-bold text-[9px] sm:text-[10px] md:text-xs tracking-wider md:tracking-widest mt-1">Dias</p>
                 </div>
-
-                <div>
-                    <span id="hours" class="block font-bangers text-6xl text-ifro-green">00</span>
-                    <p class="uppercase font-bold text-xs tracking-widest">Horas</p>
+                <!-- Coluna: Horas -->
+                <div class="flex flex-col items-center justify-center border-l border-white/20">
+                    <span id="hours" class="block font-bangers text-3xl sm:text-4xl md:text-6xl text-ifro-green">00</span>
+                    <p class="uppercase font-bold text-[9px] sm:text-[10px] md:text-xs tracking-wider md:tracking-widest mt-1">Horas</p>
                 </div>
-
-                <div>
-                    <span id="minutes" class="block font-bangers text-6xl text-zap-yellow">00</span>
-                    <p class="uppercase font-bold text-xs tracking-widest">Minutos</p>
+                <!-- Coluna: Minutos -->
+                <div class="flex flex-col items-center justify-center border-l border-white/20">
+                    <span id="minutes" class="block font-bangers text-3xl sm:text-4xl md:text-6xl text-zap-yellow">00</span>
+                    <p class="uppercase font-bold text-[9px] sm:text-[10px] md:text-xs tracking-wider md:tracking-widest mt-1">Minutos</p>
                 </div>
-
-                <div>
-                    <span id="seconds" class="block font-bangers text-6xl text-tech-blue">00</span>
-                    <p class="uppercase font-bold text-xs tracking-widest">Segundos</p>
+                <!-- Coluna: Segundos -->
+                <div class="flex flex-col items-center justify-center border-l border-white/20">
+                    <span id="seconds" class="block font-bangers text-3xl sm:text-4xl md:text-6xl text-tech-blue">00</span>
+                    <p class="uppercase font-bold text-[9px] sm:text-[10px] md:text-xs tracking-wider md:tracking-widest mt-1">Seg.</p>
                 </div>
-
             </div>
 
+            <!-- Mensagem caso o evento tenha começado -->
+            <div id="event-started" class="hidden max-w-3xl mx-auto bg-black/95 text-white comic-border shadow-comicWhite p-8 text-center animate-pulseGlow">
+                <span class="block font-bangers text-5xl md:text-6xl text-zap-yellow" style="-webkit-text-stroke:1px black;">CHEGOU A HORA!</span>
+            </div>
+
+            <!-- Botão com largura total no mobile e padding ajustado -->
             <a href="https://suap.ifro.edu.br/eventos/inscricao/1/1060/"
                target="_blank"
-               class="inline-block mt-12 bg-zap-yellow text-black font-bangers text-4xl px-12 py-6 comic-border shadow-comic hover:bg-white hover:scale-105 hover:-translate-y-1 transition-all duration-300 uppercase tracking-widest">
+               class="inline-block mt-10 w-full sm:w-auto bg-zap-yellow text-black font-bangers text-2xl sm:text-3xl md:text-4xl px-8 py-4 md:px-12 md:py-6 comic-border shadow-comic hover:bg-white hover:scale-105 hover:-translate-y-1 transition-all duration-300 uppercase tracking-widest">
                 ALISTAR AGORA
             </a>
 
         </div>
-
     </section>
 
-    <footer class="bg-black text-white border-t-8 border-zap-yellow py-10 text-center">
-
-        <h2 class="font-bangers text-4xl text-ifro-green tracking-wider">
+    <!-- Footer -->
+    <footer class="bg-black text-white border-t-8 border-zap-yellow py-8 text-center px-4">
+        <h2 class="font-bangers text-3xl md:text-4xl text-ifro-green tracking-wider">
             IFRO CAMPUS ARIQUEMES
         </h2>
-
-        <p class="font-bold text-xs uppercase tracking-[0.2em] mt-4 text-gray-400">
+        <p class="font-bold text-[10px] md:text-xs uppercase tracking-[0.2em] mt-3 md:mt-4 text-gray-400">
             O multiverso geek te espera.
         </p>
-
     </footer>
 
     <script>
+        // Lógica do Menu Mobile
+        const btnMenu = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
 
+        btnMenu.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Fechar menu ao clicar num link
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Array de Jogos
         const games = [
-            {
-                name: 'Free Fire',
-                image: 'freefire.webp'
-            },
-            {
-                name: 'Clash Royale',
-                image: 'clash.png'
-            },
-            {
-                name: 'Brawl Stars',
-                image: 'brawl.jpg'
-            },
-            {
-                name: 'Fortnite',
-                image: 'fortnite.webp'
-            }
+            { name: 'Free Fire', image: 'freefire.webp' },
+            { name: 'Clash Royale', image: 'clash.png' },
+            { name: 'Brawl Stars', image: 'brawl.jpg' },
+            { name: 'Fortnite', image: 'fortnite.webp' }
         ];
 
         const gamesGrid = document.getElementById('gamesGrid');
 
         games.forEach(game => {
             gamesGrid.innerHTML += `
-                <div class="card-hover group bg-white comic-border overflow-hidden shadow-comic hover:-translate-y-2 hover:scale-[1.03] hover:shadow-comicHover transition-all duration-300 scroll-reveal">
-
-                    <div class="h-72 overflow-hidden bg-gray-200 flex items-center justify-center p-2">
-                        <img src="${game.image}"
-                             alt="${game.name}"
-                             class="w-full h-full object-cover">
+                <div class="card-hover group bg-white comic-border overflow-hidden shadow-comic hover:-translate-y-2 hover:scale-[1.02] hover:shadow-comicHover transition-all duration-300 scroll-reveal flex flex-col">
+                    <div class="h-48 md:h-64 overflow-hidden bg-gray-200 flex items-center justify-center relative game-img-placeholder">
+                        <img src="${game.image}" 
+                             alt="${game.name}" 
+                             class="absolute inset-0 w-full h-full object-cover z-10"
+                             onerror="this.style.display='none'"> 
+                        <!-- onerror esconde a imagem quebrada caso o ficheiro local não exista, mostrando o placeholder do fundo -->
+                        <span class="font-bangers text-gray-400 text-3xl z-0 absolute">IMG</span>
                     </div>
-
-                    <div class="p-5 text-center">
-                        <a href="https://forms.gle/McKiURQMV1DacWsL9" class="inline-block mb-4 bg-hero-red text-white uppercase font-bold px-5 py-3 comic-border shadow-comic hover:bg-black transition-colors duration-300">
+                    <div class="p-4 md:p-5 text-center flex-grow flex flex-col justify-center">
+                        <a href="https://forms.gle/McKiURQMV1DacWsL9" target="_blank" class="inline-block mb-3 bg-hero-red text-white uppercase text-sm md:text-base font-bold px-4 py-2 md:px-5 md:py-3 comic-border shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-y-1 hover:translate-x-1 hover:bg-black transition-all duration-300 w-full">
                             Escolher jogo
                         </a>
-                        <h3 class="font-black uppercase text-xl">
+                        <h3 class="font-black uppercase text-lg md:text-xl">
                             ${game.name}
                         </h3>
                     </div>
-
                 </div>
             `;
         });
 
+        // Intersection Observer para animações de scroll
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -571,35 +534,30 @@
                 }
             });
         }, {
-            threshold: 0.1
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px' // Ativa um pouco antes no mobile
         });
 
         document.querySelectorAll('.scroll-reveal').forEach(el => {
             observer.observe(el);
         });
 
+        // Efeito de clique em onomatopeias
         const onomatopoeias = ['POW!', 'ZAP!', 'BAM!', 'WOW!', 'IFRO!', 'NERD!'];
-
-        const colors = [
-            'text-zap-yellow',
-            'text-hero-red',
-            'text-ifro-green',
-            'text-tech-blue'
-        ];
+        const colors = ['text-zap-yellow', 'text-hero-red', 'text-ifro-green', 'text-tech-blue'];
 
         document.body.addEventListener('click', e => {
-
+            // Ignora se for link, botão ou toque na ecrã (para não atrapalhar scroll no telemóvel)
             if (
                 e.target.closest('a') ||
-                e.target.closest('button')
+                e.target.closest('button') ||
+                e.pointerType === 'touch' 
             ) return;
 
             const text = document.createElement('div');
-
             text.innerText = onomatopoeias[Math.floor(Math.random() * onomatopoeias.length)];
-
-            text.className = `fixed font-bangers text-5xl ${colors[Math.floor(Math.random() * colors.length)]} animate-floatUp pointer-events-none z-[999]`;
-
+            text.className = `fixed font-bangers text-4xl md:text-5xl ${colors[Math.floor(Math.random() * colors.length)]} animate-floatUp pointer-events-none z-[999]`;
+            
             text.style.left = `${e.clientX - 20}px`;
             text.style.top = `${e.clientY - 20}px`;
             text.style.WebkitTextStroke = '1px black';
@@ -610,37 +568,29 @@
             text.addEventListener('animationend', () => {
                 text.remove();
             });
-
         });
 
-        const target = new Date('May 25, 2026 08:00:00').getTime();
+        // Cronómetro
+        const targetDate = new Date('May 25, 2026 08:00:00').getTime();
+        const countdownContainer = document.getElementById('countdown-container');
+        const eventStartedMsg = document.getElementById('event-started');
 
         function updateTimer() {
-
             const now = new Date().getTime();
-            const distance = target - now;
+            const distance = targetDate - now;
 
-            if (distance < 0) return;
+            if (distance < 0) {
+                // Se a data já passou, esconde o relógio e mostra mensagem
+                countdownContainer.classList.add('hidden');
+                countdownContainer.classList.remove('grid');
+                eventStartedMsg.classList.remove('hidden');
+                return;
+            }
 
-            document.getElementById('days').innerText =
-                Math.floor(distance / (1000 * 60 * 60 * 24))
-                .toString()
-                .padStart(2, '0');
-
-            document.getElementById('hours').innerText =
-                Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-                .toString()
-                .padStart(2, '0');
-
-            document.getElementById('minutes').innerText =
-                Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
-                .toString()
-                .padStart(2, '0');
-
-            document.getElementById('seconds').innerText =
-                Math.floor((distance % (1000 * 60)) / 1000)
-                .toString()
-                .padStart(2, '0');
+            document.getElementById('days').innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+            document.getElementById('hours').innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
         }
 
         updateTimer();
@@ -654,6 +604,5 @@
             window.scrollTo({ top: 0, left: 0 });
         });
     </script>
-
 </body>
 </html>
