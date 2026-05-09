@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dia do Orgulho Nerd | IFRO Campus Ariquemes</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
+
     <script>
         tailwind.config = {
             theme: {
@@ -13,265 +16,645 @@
                     colors: {
                         ifro: {
                             green: '#009432',
-                            dark: '#006b24',
+                            dark: '#006b24'
                         },
                         hero: {
                             red: '#ED1C24',
-                            dark: '#c51017',
+                            dark: '#b51218'
                         },
                         zap: {
-                            yellow: '#FFD700',
+                            yellow: '#FFD700'
                         },
                         tech: {
-                            blue: '#0984E3',
+                            blue: '#0984E3'
                         }
                     },
                     fontFamily: {
                         bangers: ['Bangers', 'cursive'],
-                        montserrat: ['Montserrat', 'sans-serif'],
+                        montserrat: ['Montserrat', 'sans-serif']
                     },
                     boxShadow: {
-                        'comic': '6px 6px 0px 0px rgba(0,0,0,1)',
-                        'comic-hover': '2px 2px 0px 0px rgba(0,0,0,1)',
-                        'comic-white': '4px 4px 0px 0px rgba(255,255,255,1)',
+                        comic: '6px 6px 0px 0px rgba(0,0,0,1)',
+                        comicHover: '10px 10px 0px 0px rgba(0,0,0,1)',
+                        comicWhite: '4px 4px 0px 0px rgba(255,255,255,1)'
                     },
                     animation: {
-                        'float-up': 'floatUp 1s ease-out forwards',
-                        'glitch': 'glitch 2s linear infinite',
+                        floatUp: 'floatUp 1s ease-out forwards',
+                        glitch: 'glitch 2s linear infinite',
+                        pulseGlow: 'pulseGlow 3s infinite'
                     },
                     keyframes: {
                         floatUp: {
-                            '0%': { opacity: '1', transform: 'translateY(0) scale(1) rotate(0deg)' },
-                            '100%': { opacity: '0', transform: 'translateY(-50px) scale(1.5) rotate(15deg)' },
+                            '0%': {
+                                opacity: '1',
+                                transform: 'translateY(0) scale(1) rotate(0deg)'
+                            },
+                            '100%': {
+                                opacity: '0',
+                                transform: 'translateY(-70px) scale(1.6) rotate(12deg)'
+                            }
                         },
                         glitch: {
-                            '0%, 100%': { transform: 'translate(0)' },
-                            '20%': { transform: 'translate(-2px, 2px)' },
-                            '40%': { transform: 'translate(-2px, -2px)' },
-                            '60%': { transform: 'translate(2px, 2px)' },
-                            '80%': { transform: 'translate(2px, -2px)' },
+                            '0%,100%': {
+                                transform: 'translate(0)'
+                            },
+                            '20%': {
+                                transform: 'translate(-2px,2px)'
+                            },
+                            '40%': {
+                                transform: 'translate(-2px,-2px)'
+                            },
+                            '60%': {
+                                transform: 'translate(2px,2px)'
+                            },
+                            '80%': {
+                                transform: 'translate(2px,-2px)'
+                            }
+                        },
+                        pulseGlow: {
+                            '0%,100%': {
+                                boxShadow: '0 0 0px rgba(255,215,0,0.0)'
+                            },
+                            '50%': {
+                                boxShadow: '0 0 35px rgba(255,215,0,0.5)'
+                            }
                         }
                     }
                 }
             }
         }
     </script>
+
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            cursor: crosshair;
-            background-color: #f4f4f0;
+            font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
+            cursor: crosshair;
+            background:
+                radial-gradient(circle at top left, rgba(255,215,0,.12), transparent 30%),
+                radial-gradient(circle at bottom right, rgba(9,132,227,.12), transparent 30%),
+                #f4f4f0;
         }
-        .halftone-bg {
-            background-image: 
-                radial-gradient(circle at center, #000 2px, transparent 2.5px),
-                url('Ariquemes-Pós_2.jpg');
-            background-size: 12px 12px, cover;
-            background-position: center, center;
-            background-attachment: fixed, fixed;
-            background-color: #009432;
-            background-blend-mode: overlay;
-            filter: contrast(120%) saturate(150%);
-        }
-        .comic-border-thick {
+
+        .comic-border {
             border: 4px solid black;
+        }
+
+        .hero-bg {
+            background:
+                linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.8)),
+                url('Ariquemes-Pós_2.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-grid {
+            background-image:
+                linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .hero-glow {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at center,
+                rgba(255,215,0,.25),
+                transparent 40%);
+            mix-blend-mode: screen;
+        }
+
+        .timeline-line {
+            background:
+                linear-gradient(
+                    to bottom,
+                    #ED1C24,
+                    #FFD700,
+                    #009432,
+                    #0984E3
+                );
+        }
+
+        .glass {
+            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,.85);
+        }
+
+        .noise::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: .08;
+            pointer-events: none;
+            background-image:
+                radial-gradient(#000 1px, transparent 1px);
+            background-size: 8px 8px;
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all .8s ease;
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
-<body class="font-montserrat text-gray-900 antialiased">
+<body class="text-gray-900 antialiased">
+    <br>
 
-<!-- Chosen Palette: Multiverso IFRO (Verde #009432, Vermelho #ED1C24, Amarelo #FFD700) -->
-<!-- Application Structure Plan: SPA minimalista focada no essencial. A estrutura foi reduzida para apresentar o conceito (A Missão) e a execução (Cronograma). A navegação foi simplificada e os elementos interativos agora focam apenas na experiência de clique (onomatopéias) e na conversão final (inscrição). O design mantém a estética Spider-Verse para alto impacto visual. -->
-<!-- Visualization & Content Choices: 1. Header Hero -> A Missão -> Estabelece o tom narrativo. 2. Linha do Tempo -> Cronograma -> Lista clara de atividades por horário. 3. Footer/CTA -> Alistamento -> Garante a conversão via SUAP. -->
-<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-
-    <nav class="fixed w-full z-40 top-0 border-b-4 border-black bg-ifro-green text-white shadow-comic">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav class="fixed w-full top-0 z-50 bg-ifro-green/90 backdrop-blur-md border-b-4 border-black shadow-comic">
+        <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center h-16">
-                <div class="flex-shrink-0 flex items-center">
-                    <span class="font-bangers text-3xl tracking-widest text-zap-yellow" style="-webkit-text-stroke: 1px black;">IFRO NERD</span>
-                </div>
-                <div class="hidden md:flex space-x-8 font-bold">
-                    <a href="#missao" class="hover:text-zap-yellow transition-colors duration-200">A Missão</a>
-                    <a href="#cronograma" class="hover:text-zap-yellow transition-colors duration-200">Cronograma</a>
-                </div>
+
                 <div>
-                    <a href="#alistamento" class="font-bangers text-xl bg-hero-red text-white px-6 py-2 comic-border-thick shadow-comic hover:translate-y-1 hover:shadow-comic-hover transition-all duration-200">ALISTE-SE</a>
+                    <span class="font-bangers text-4xl text-zap-yellow tracking-widest" style="-webkit-text-stroke:1px black;">
+                        IFRO NERD
+                    </span>
                 </div>
+
+                <div class="hidden md:flex items-center gap-8 text-white font-bold uppercase text-sm">
+                    <a href="#missao" class="hover:text-zap-yellow transition">Missão</a>
+                    <a href="#cronograma" class="hover:text-zap-yellow transition">Cronograma</a>
+                    <a href="#games" class="hover:text-zap-yellow transition">Torneios</a>
+                    <a href="#regulamentos" class="hover:text-zap-yellow transition">Regulamentos</a>
+                </div>
+
+                <a href="#alistamento"
+                   class="font-bangers text-xl bg-hero-red text-white px-6 py-2 comic-border shadow-comic hover:-translate-y-1 hover:scale-105 transition-all duration-300">
+                    ALISTE-SE
+                </a>
+
             </div>
         </div>
     </nav>
 
-    <header id="missao" class="relative pt-16 min-h-[90vh] flex items-center justify-center overflow-hidden bg-black">
-        <div class="absolute inset-0 halftone-bg opacity-80"></div>
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-90"></div>
-        
-        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto">
-            <h1 class="font-bangers text-6xl md:text-8xl lg:text-9xl text-zap-yellow mb-4 animate-glitch" style="-webkit-text-stroke: 2px black; text-shadow: 4px 4px 0px #ED1C24, 8px 8px 0px #0984E3;">
-                POW! ZAP!<br>IFRO ARIQUEMES
+    <header id="missao" class="hero-bg hero-grid relative min-h-screen flex items-center justify-center overflow-hidden">
+
+        <div class="hero-glow"></div>
+
+        <div class="absolute inset-0 noise"></div>
+
+        <div class="relative z-10 text-center px-6 max-w-6xl">
+
+            <p class="text-white font-black tracking-[0.3em] uppercase mb-4">
+                25 de Maio • IFRO Campus Ariquemes
+            </p>
+
+            <h1 class="font-bangers text-zap-yellow leading-none text-6xl md:text-8xl lg:text-[11rem] animate-glitch"
+                style="
+                    -webkit-text-stroke: 3px black;
+                    text-shadow:
+                        3px 3px 0 #ED1C24,
+                        6px 6px 0 #0984E3,
+                        0 0 25px rgba(255,215,0,.5);
+                ">
+                POW!<br>
+                ZAP!<br>
+                IFRO
             </h1>
-            <div class="bg-white comic-border-thick p-6 md:p-8 inline-block shadow-comic mt-8 max-w-3xl transform -rotate-1 hover:rotate-0 transition-transform duration-300">
-                <p class="font-bold text-xl md:text-2xl uppercase text-hero-red mb-2">Unindo o Multiverso Acadêmico!</p>
-                <p class="text-lg font-medium">
-                    Prepare-se para a maior convergência geek da história do campus! Do campo aos códigos, das receitas às artes. A missão do Dia do Orgulho Nerd é clara: celebrar o conhecimento e a cultura pop com a força máxima do IFRO Ariquemes.
+
+            <div style="margin-bottom: 20px;" class="bg-white comic-border p-6 md:p-8 inline-block shadow-comic mt-8 max-w-3xl transform -rotate-1 hover:rotate-0 transition-transform duration-300">
+
+                <p class="font-black text-xl md:text-2xl uppercase text-hero-red mb-4">
+                    Unindo o Multiverso Acadêmico!
                 </p>
+
+                <p class="text-lg font-medium leading-relaxed mb-4">
+                    Prepare-se para a maior convergência geek da história do campus!
+                </p>
+
+                <p class="text-lg font-medium leading-relaxed mb-4">
+                    Do campo aos códigos, das receitas às artes.
+                </p>
+
+                <p class="text-lg font-medium leading-relaxed">
+                    A missão do Dia do Orgulho Nerd é clara: celebrar o conhecimento e a cultura pop com a força máxima do IFRO Ariquemes.
+                </p>
+
             </div>
+
         </div>
+
     </header>
 
-    <main>
-        <section id="cronograma" class="py-20 bg-white border-y-4 border-black relative">
-            <div class="max-w-5xl mx-auto px-4">
-                <div class="mb-12 text-center bg-tech-blue text-white comic-border-thick p-6 shadow-comic transform rotate-1">
-                    <h2 class="font-bangers text-6xl text-zap-yellow mb-2" style="-webkit-text-stroke: 1px black;">Linha do Tempo</h2>
-                    <p class="font-bold">Acompanhe os movimentos da resistência e não perca nenhum segundo!</p>
-                </div>
+    <section id="games" class="py-24 relative overflow-hidden">
 
-                <div class="relative border-l-8 border-black ml-4 md:ml-1/2 space-y-12 py-8">
-                    <!-- Manhã -->
-                    <div class="relative pl-8 md:pl-0">
-                        <div class="md:w-1/2 md:-ml-8 md:pr-12 md:text-right">
-                            <div class="absolute -left-12 md:left-auto md:-right-4 top-2 w-8 h-8 bg-hero-red comic-border-thick rounded-full z-10"></div>
-                            <div class="bg-white comic-border-thick p-5 shadow-comic inline-block text-left w-full group hover:bg-gray-50">
-                                <span class="font-bangers text-3xl text-hero-red">08:00 - 12:00</span>
-                                <h4 class="font-bold text-2xl mb-2 mt-1 uppercase">Abertura & Torneios</h4>
-                                <ul class="text-sm font-bold space-y-1 text-gray-700">
-                                    <li>• Torneio de Free Fire e Clash Royale</li>
-                                    <li>• Mesas de RPG e Jogos de Tabuleiro</li>
-                                    <li>• Estações de Quiz e Troca de Cartas</li>
-                                    <li>• Cinemas</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Almoço -->
-                    <div class="relative pl-8 md:pl-0">
-                        <div class="md:w-1/2 md:ml-auto md:-mr-8 md:pl-12 text-left">
-                            <div class="absolute -left-12 md:left-4 top-2 w-8 h-8 bg-zap-yellow comic-border-thick rounded-full z-10"></div>
-                            <div class="bg-zap-yellow comic-border-thick p-5 shadow-comic inline-block text-left w-full">
-                                <span class="font-bangers text-3xl text-black">12:00 - 13:00</span>
-                                <h4 class="font-bold text-2xl mb-1 mt-1 uppercase">Recarga Energética</h4>
-                                <p class="text-sm font-bold">Pausa para o Almoço: Recuperação de HP.</p>
-                            </div>
-                        </div>
-                    </div>
+        <div class="max-w-7xl mx-auto px-4">
 
-                    <!-- Tarde 1 -->
-                    <div class="relative pl-8 md:pl-0">
-                        <div class="md:w-1/2 md:-ml-8 md:pr-12 md:text-right">
-                            <div class="absolute -left-12 md:left-auto md:-right-4 top-2 w-8 h-8 bg-tech-blue comic-border-thick rounded-full z-10"></div>
-                            <div class="bg-white comic-border-thick p-5 shadow-comic inline-block text-left w-full group hover:bg-gray-50">
-                                <span class="font-bangers text-3xl text-tech-blue">13:00 - 15:15</span>
-                                <h4 class="font-bold text-2xl mb-2 mt-1 uppercase">Imersão & Cinema</h4>
-                                <p class="text-sm font-bold text-gray-700">Visitas às Salas Temáticas e Sessões de Cinema.</p>
-                            </div>
-                        </div>
-                    </div>
+            <div class="text-center mb-14 scroll-reveal">
 
-                    <!-- Intervalo -->
-                    <div class="relative pl-8 md:pl-0">
-                        <div class="md:w-1/2 md:ml-auto md:-mr-8 md:pl-12 text-left">
-                            <div class="absolute -left-12 md:left-4 top-2 w-8 h-8 bg-ifro-green comic-border-thick rounded-full z-10"></div>
-                            <div class="bg-gray-100 comic-border-thick p-4 shadow-comic inline-block text-left w-full">
-                                <span class="font-bangers text-2xl text-ifro-green">15:15 - 15:30</span>
-                                <h4 class="font-bold text-xl uppercase">Lanche (Intervalo)</h4>
-                                <p class="text-xs font-bold">15 minutos para lanche rápido.</p>
-                            </div>
-                        </div>
-                    </div>
+                <h2 class="font-bangers text-6xl text-hero-red"
+                    style="-webkit-text-stroke:1px black;">
+                    TORNEIOS
+                </h2>
 
-                    <!-- Show de Talentos -->
-                    <div class="relative pl-8 md:pl-0">
-                        <div class="md:w-1/2 md:-ml-8 md:pr-12 md:text-right">
-                            <div class="absolute -left-12 md:left-auto md:-right-4 top-2 w-8 h-8 bg-ifro-green comic-border-thick rounded-full z-10"></div>
-                            <div class="bg-white comic-border-thick p-5 shadow-comic inline-block text-left w-full group hover:bg-gray-50">
-                                <span class="font-bangers text-3xl text-ifro-green">15:30 - 16:15</span>
-                                <h4 class="font-bold text-2xl mb-1 mt-1 uppercase">Momento Show de Talentos</h4>
-                                <p class="text-sm font-bold text-gray-700">Apresentações de K-Pop, aberturas de anime e dança.</p>
-                            </div>
-                        </div>
-                    </div>
+                <p class="font-bold uppercase tracking-wider mt-2">
+                    Escolha seu campo de batalha.
+                </p>
 
-                    <!-- Cosplay -->
-                    <div class="relative pl-8 md:pl-0">
-                        <div class="md:w-1/2 md:ml-auto md:-mr-8 md:pl-12 text-left">
-                            <div class="absolute -left-12 md:left-4 top-2 w-8 h-8 bg-hero-red comic-border-thick rounded-full z-10"></div>
-                            <div class="bg-hero-red text-white comic-border-thick p-5 shadow-comic inline-block text-left w-full group hover:scale-105 transition-transform">
-                                <span class="font-bangers text-3xl text-zap-yellow">16:15 - 17:00</span>
-                                <h4 class="font-bold text-2xl mb-1 mt-1 uppercase">Grande Desfile Cosplay</h4>
-                                <p class="text-sm font-bold">O ápice do multiverso! Apresentações individuais e em grupo.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Encerramento -->
-                    <div class="relative pl-8 md:pl-0">
-                        <div class="md:w-1/2 md:-ml-8 md:pr-12 md:text-right">
-                            <div class="absolute -left-12 md:left-auto md:-right-4 top-2 w-8 h-8 bg-black comic-border-thick rounded-full z-10"></div>
-                            <div class="bg-black text-white comic-border-thick p-5 shadow-comic inline-block text-left w-full group hover:bg-gray-900">
-                                <span class="font-bangers text-3xl text-zap-yellow">17:00 - 17:30</span>
-                                <h4 class="font-bold text-2xl mb-1 mt-1 uppercase">Premiações & Sorteios</h4>
-                                <p class="text-sm font-bold">Entrega de medalhas, brindes e encerramento oficial.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
-        </section>
 
-        <section id="alistamento" class="py-24 bg-hero-red relative">
-            <div class="max-w-5xl mx-auto px-4 text-center relative z-10">
-                <h2 class="font-bangers text-6xl md:text-8xl text-zap-yellow mb-6" style="-webkit-text-stroke: 2px black;">INSCREVA-SE!</h2>
-                <div id="countdown" class="bg-black text-white comic-border-thick p-6 shadow-comic-white max-w-2xl mx-auto mb-10 flex justify-center gap-4">
-                    <div class="text-center"><span id="days" class="font-bangers text-4xl block text-hero-red">00</span><p class="text-[10px] uppercase">Dias</p></div>
-                    <div class="text-center"><span id="hours" class="font-bangers text-4xl block text-ifro-green">00</span><p class="text-[10px] uppercase">Hrs</p></div>
-                    <div class="text-center"><span id="minutes" class="font-bangers text-4xl block text-zap-yellow">00</span><p class="text-[10px] uppercase">Min</p></div>
-                    <div class="text-center"><span id="seconds" class="font-bangers text-4xl block text-tech-blue">00</span><p class="text-[10px] uppercase">Seg</p></div>
-                </div>
-                <a href="https://suap.ifro.edu.br/eventos/inscricao/1/1060/" target="_blank" class="inline-block bg-zap-yellow text-black font-bangers text-4xl px-12 py-6 comic-border-thick shadow-comic hover:bg-white transition-all uppercase tracking-widest">
-                    Aliste-se Agora!
-                </a>
+            <div id="gamesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"></div>
+
+        </div>
+
+    </section>
+
+    <section id="regulamentos" class="py-24 bg-gray-100 relative overflow-hidden">
+
+        <div class="max-w-5xl mx-auto px-4">
+
+            <div class="text-center mb-14 scroll-reveal">
+
+                <h2 class="font-bangers text-6xl text-hero-red" style="-webkit-text-stroke:1px black;">
+                    REGULAMENTOS
+                </h2>
+
+                <p class="font-bold uppercase tracking-wider mt-2">
+                    Regras do evento.
+                </p>
+
             </div>
-        </section>
-    </main>
 
-    <footer class="bg-black text-white py-10 border-t-8 border-zap-yellow text-center">
-        <h2 class="font-bangers text-3xl text-ifro-green">IFRO Campus Ariquemes</h2>
-        <p class="text-xs font-bold text-gray-500 mt-2 italic">O multiverso geek te espera no dia 25 de Maio.</p>
+            <details class="bg-white comic-border p-6 shadow-comic scroll-reveal">
+                <summary class="font-bangers text-2xl cursor-pointer">Clique para expandir os regulamentos</summary>
+                <div class="mt-4">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+            </details>
+
+        </div>
+
+    </section>
+
+    <section id="cronograma" class="py-24 bg-white border-y-4 border-black relative overflow-hidden">
+
+        <div class="absolute inset-0 opacity-10 pointer-events-none">
+            <div class="hero-grid w-full h-full"></div>
+        </div>
+
+        <div class="max-w-5xl mx-auto px-4 relative z-10">
+
+            <div class="text-center mb-16 scroll-reveal">
+
+                <div class="inline-block bg-tech-blue text-white comic-border px-8 py-6 shadow-comic rotate-1">
+                    <h2 class="font-bangers text-6xl text-zap-yellow"
+                        style="-webkit-text-stroke:1px black;">
+                        LINHA DO TEMPO
+                    </h2>
+
+                    <p class="font-bold mt-2 uppercase text-sm tracking-wide">
+                        Cada minuto conta.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="relative ml-6 md:ml-0">
+
+                <div class="absolute left-0 md:left-1/2 top-0 -translate-x-1/2 w-3 h-full rounded-full timeline-line border-2 border-black"></div>
+
+                <div class="space-y-16">
+
+                    <div class="relative md:flex md:justify-start scroll-reveal">
+
+                        <div class="md:w-1/2 md:pr-14">
+
+                            <div class="absolute left-[-14px] md:left-auto md:right-[-18px] top-5 w-8 h-8 rounded-full bg-hero-red border-4 border-black z-20"></div>
+
+                            <div class="bg-white comic-border p-6 shadow-comic hover:-translate-y-2 transition duration-300">
+
+                                <span class="font-bangers text-4xl text-hero-red">08:00 - 12:00</span>
+
+                                <h3 class="font-black uppercase text-2xl mt-2 mb-4">
+                                    Abertura & Torneios
+                                </h3>
+
+                                <p class="font-medium leading-relaxed">
+                                    Início oficial do evento com partidas, disputas e desafios competitivos.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="relative md:flex md:justify-end scroll-reveal">
+
+                        <div class="md:w-1/2 md:pl-14">
+
+                            <div class="absolute left-[-14px] md:left-[-18px] top-5 w-8 h-8 rounded-full bg-zap-yellow border-4 border-black z-20"></div>
+
+                            <div class="bg-zap-yellow comic-border p-6 shadow-comic hover:-translate-y-2 transition duration-300">
+
+                                <span class="font-bangers text-4xl">12:00 - 13:00</span>
+
+                                <h3 class="font-black uppercase text-2xl mt-2 mb-4">
+                                    Recarga Energética
+                                </h3>
+
+                                <p class="font-medium">
+                                    Hora de restaurar HP antes da próxima fase.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="relative md:flex md:justify-start scroll-reveal">
+
+                        <div class="md:w-1/2 md:pr-14">
+
+                            <div class="absolute left-[-14px] md:left-auto md:right-[-18px] top-5 w-8 h-8 rounded-full bg-tech-blue border-4 border-black z-20"></div>
+
+                            <div class="bg-white comic-border p-6 shadow-comic hover:-translate-y-2 transition duration-300">
+
+                                <span class="font-bangers text-4xl text-tech-blue">13:00 - 15:15</span>
+
+                                <h3 class="font-black uppercase text-2xl mt-2 mb-4">
+                                    Imersão & Cinema
+                                </h3>
+
+                                <p class="font-medium">
+                                    Sessões temáticas, experiências geek e exibições especiais.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="relative md:flex md:justify-end scroll-reveal">
+
+                        <div class="md:w-1/2 md:pl-14">
+
+                            <div class="absolute left-[-14px] md:left-[-18px] top-5 w-8 h-8 rounded-full bg-ifro-green border-4 border-black z-20"></div>
+
+                            <div class="bg-ifro-green text-white comic-border p-6 shadow-comic hover:-translate-y-2 transition duration-300">
+
+                                <span class="font-bangers text-4xl text-zap-yellow">15:30 - 16:15</span>
+
+                                <h3 class="font-black uppercase text-2xl mt-2 mb-4">
+                                    Show de Talentos
+                                </h3>
+
+                                <p class="font-medium">
+                                    K-pop, aberturas de anime, dança e apresentações criativas.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="relative md:flex md:justify-start scroll-reveal">
+
+                        <div class="md:w-1/2 md:pr-14">
+
+                            <div class="absolute left-[-14px] md:left-auto md:right-[-18px] top-5 w-8 h-8 rounded-full bg-black border-4 border-black z-20"></div>
+
+                            <div class="bg-black text-white comic-border p-6 shadow-comic hover:-translate-y-2 transition duration-300">
+
+                                <span class="font-bangers text-4xl text-zap-yellow">16:15 - 17:30</span>
+
+                                <h3 class="font-black uppercase text-2xl mt-2 mb-4">
+                                    Cosplay & Premiações
+                                </h3>
+
+                                <p class="font-medium">
+                                    O grande final do multiverso nerd com brindes, medalhas e sorteios.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section id="alistamento" class="py-28 bg-hero-red relative overflow-hidden">
+
+        <div class="absolute inset-0 hero-grid opacity-20"></div>
+
+        <div class="max-w-5xl mx-auto px-4 text-center relative z-10">
+
+            <h2 class="font-bangers text-zap-yellow text-7xl md:text-9xl leading-none mb-6"
+                style="-webkit-text-stroke:2px black;">
+                INSCREVA-SE
+            </h2>
+
+            <p class="text-white font-bold uppercase tracking-[0.2em] mb-10">
+                O evento começa em:
+            </p>
+
+            <div id="countdown"
+                 class="max-w-3xl mx-auto bg-black/95 backdrop-blur-md text-white comic-border shadow-comicWhite p-8 grid grid-cols-2 md:grid-cols-4 gap-6 animate-pulseGlow">
+
+                <div>
+                    <span id="days" class="block font-bangers text-6xl text-hero-red">00</span>
+                    <p class="uppercase font-bold text-xs tracking-widest">Dias</p>
+                </div>
+
+                <div>
+                    <span id="hours" class="block font-bangers text-6xl text-ifro-green">00</span>
+                    <p class="uppercase font-bold text-xs tracking-widest">Horas</p>
+                </div>
+
+                <div>
+                    <span id="minutes" class="block font-bangers text-6xl text-zap-yellow">00</span>
+                    <p class="uppercase font-bold text-xs tracking-widest">Minutos</p>
+                </div>
+
+                <div>
+                    <span id="seconds" class="block font-bangers text-6xl text-tech-blue">00</span>
+                    <p class="uppercase font-bold text-xs tracking-widest">Segundos</p>
+                </div>
+
+            </div>
+
+            <a href="https://suap.ifro.edu.br/eventos/inscricao/1/1060/"
+               target="_blank"
+               class="inline-block mt-12 bg-zap-yellow text-black font-bangers text-4xl px-12 py-6 comic-border shadow-comic hover:bg-white hover:scale-105 hover:-translate-y-1 transition-all duration-300 uppercase tracking-widest">
+                ALISTAR AGORA
+            </a>
+
+        </div>
+
+    </section>
+
+    <footer class="bg-black text-white border-t-8 border-zap-yellow py-10 text-center">
+
+        <h2 class="font-bangers text-4xl text-ifro-green tracking-wider">
+            IFRO CAMPUS ARIQUEMES
+        </h2>
+
+        <p class="font-bold text-xs uppercase tracking-[0.2em] mt-4 text-gray-400">
+            O multiverso geek te espera.
+        </p>
+
     </footer>
 
     <script>
-        // Onomatopéias de clique
-        const onomatopoeias = ["POW!", "ZAP!", "BAM!", "CLICK!", "NERD!", "IFRO!"];
-        const colors = ["text-zap-yellow", "text-hero-red", "text-ifro-green", "text-tech-blue"];
-        
-        document.body.addEventListener('click', function(e) {
-            if (e.target.closest('button') || e.target.closest('a')) return;
-            const text = document.createElement('div');
-            text.innerText = onomatopoeias[Math.floor(Math.random() * onomatopoeias.length)];
-            text.className = `fixed font-bangers text-4xl ${colors[Math.floor(Math.random() * colors.length)]} animate-float-up pointer-events-none z-[60]`;
-            text.style.left = `${e.clientX - 20}px`;
-            text.style.top = `${e.clientY - 20}px`;
-            text.style.WebkitTextStroke = "1px black";
-            text.style.textShadow = "2px 2px 0px rgba(0,0,0,1)";
-            document.body.appendChild(text);
-            setTimeout(() => text.remove(), 1000);
+
+        const games = [
+            {
+                name: 'Free Fire',
+                image: 'freefire.webp'
+            },
+            {
+                name: 'Clash Royale',
+                image: 'clash.png'
+            },
+            {
+                name: 'Brawl Stars',
+                image: 'brawl.jpg'
+            },
+            {
+                name: 'Fortnite',
+                image: 'fortnite.webp'
+            }
+        ];
+
+        const gamesGrid = document.getElementById('gamesGrid');
+
+        games.forEach(game => {
+            gamesGrid.innerHTML += `
+                <div class="card-hover group bg-white comic-border overflow-hidden shadow-comic hover:-translate-y-2 hover:scale-[1.03] hover:shadow-comicHover transition-all duration-300 scroll-reveal">
+
+                    <div class="h-72 overflow-hidden bg-gray-200 flex items-center justify-center p-2">
+                        <img src="${game.image}"
+                             alt="${game.name}"
+                             class="w-full h-full object-cover">
+                    </div>
+
+                    <div class="p-5 text-center">
+                        <a href="https://forms.gle/McKiURQMV1DacWsL9" class="inline-block mb-4 bg-hero-red text-white uppercase font-bold px-5 py-3 comic-border shadow-comic hover:bg-black transition-colors duration-300">
+                            Escolher jogo
+                        </a>
+                        <h3 class="font-black uppercase text-xl">
+                            ${game.name}
+                        </h3>
+                    </div>
+
+                </div>
+            `;
         });
 
-        // Contador Regressivo
-        const target = new Date("May 25, 2026 08:00:00").getTime();
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        const onomatopoeias = ['POW!', 'ZAP!', 'BAM!', 'WOW!', 'IFRO!', 'NERD!'];
+
+        const colors = [
+            'text-zap-yellow',
+            'text-hero-red',
+            'text-ifro-green',
+            'text-tech-blue'
+        ];
+
+        document.body.addEventListener('click', e => {
+
+            if (
+                e.target.closest('a') ||
+                e.target.closest('button')
+            ) return;
+
+            const text = document.createElement('div');
+
+            text.innerText = onomatopoeias[Math.floor(Math.random() * onomatopoeias.length)];
+
+            text.className = `fixed font-bangers text-5xl ${colors[Math.floor(Math.random() * colors.length)]} animate-floatUp pointer-events-none z-[999]`;
+
+            text.style.left = `${e.clientX - 20}px`;
+            text.style.top = `${e.clientY - 20}px`;
+            text.style.WebkitTextStroke = '1px black';
+            text.style.textShadow = '2px 2px 0 rgba(0,0,0,1)';
+
+            document.body.appendChild(text);
+
+            text.addEventListener('animationend', () => {
+                text.remove();
+            });
+
+        });
+
+        const target = new Date('May 25, 2026 08:00:00').getTime();
+
         function updateTimer() {
+
             const now = new Date().getTime();
-            const d = target - now;
-            if (d < 0) return;
-            document.getElementById("days").innerText = Math.floor(d / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-            document.getElementById("hours").innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-            document.getElementById("minutes").innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-            document.getElementById("seconds").innerText = Math.floor((d % (1000 * 60)) / 1000).toString().padStart(2, '0');
+            const distance = target - now;
+
+            if (distance < 0) return;
+
+            document.getElementById('days').innerText =
+                Math.floor(distance / (1000 * 60 * 60 * 24))
+                .toString()
+                .padStart(2, '0');
+
+            document.getElementById('hours').innerText =
+                Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+                .toString()
+                .padStart(2, '0');
+
+            document.getElementById('minutes').innerText =
+                Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
+                .toString()
+                .padStart(2, '0');
+
+            document.getElementById('seconds').innerText =
+                Math.floor((distance % (1000 * 60)) / 1000)
+                .toString()
+                .padStart(2, '0');
         }
-        setInterval(updateTimer, 1000);
+
         updateTimer();
+        setInterval(updateTimer, 1000);
+
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
+        window.addEventListener('load', () => {
+            window.scrollTo({ top: 0, left: 0 });
+        });
     </script>
+
 </body>
 </html>
